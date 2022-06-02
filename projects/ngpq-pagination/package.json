@@ -1,0 +1,22 @@
+{
+  "name": "ngpq-pagination",
+  "version": "0.1.4",
+  "author": "Aram Petrosyan",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AramPqo/Pagination"
+  },
+  "homepage": "https://arampqo.github.io/Pagination",
+  "keywords": [
+    "angular",
+    "pagination"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^12.2.0",
+    "@angular/core": "^12.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}
