@@ -1,6 +1,11 @@
 # Paginator for Angular
 `ngpq-pagination`
 
+## Installation
+```
+npm install ngpq-pagination
+```
+
 ## Example
 #### Template
 ```html
@@ -9,6 +14,7 @@
   [maxSize]="6"
   [(page)]="pageNumber" 
   [totalElements]="data.length"
+  [arrows]="arrows"
   [directionLinks]="true"
   (pageChange)="pageChange($event)">
 </ngpq-pagination>
@@ -18,6 +24,7 @@
 ```typescript
 export class AppComponent {
     pageNumber = 1;
+    arrows = new PaginationArrow('prev', 'next', 'first', 'last');
 }
 ```
 
@@ -25,22 +32,18 @@ export class AppComponent {
 ```typescript
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component.ts';
-import { NgpqPaginationComponent } from 'ngpq-pagination';
+import { NgPqPaginationModule } from 'ngpq-pagination';
 
 export class AppModule {
     declarations: [
     AppComponent
-  ],
-    imports: [
+   ],
+   imports: [
     NgPqPaginationModule
-    ]
+   ]
 }
 ```
-
-## Installation
-```
-npm install ngpq-pagination
-```
+![alt text](https://www.linkpicture.com/q/pagination.png) 
 
 ## Inputs
 

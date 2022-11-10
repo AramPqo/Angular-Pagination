@@ -1,42 +1,64 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { PaginationArrow } from "./model";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+} from "@angular/core";
 
 @Component({
-  selector: 'ngpq-pagination',
+  selector: "ngpq-pagination",
   template: `
     <ul class="pagination">
-      <li *ngIf="directionLinks" class="page-item arrow" [class.disabled]="pageNumber === pages[0]">
-        <a class="page-link" (click)="first()">««</a>
+      <li
+        *ngIf="directionLinks"
+        class="page-item arrow"
+        [class.disabled]="pageNumber === pages[0]"
+      >
+        <a class="page-link" (click)="first()" [innerHTML]="arrows.first"></a>
       </li>
       <li class="page-item arrow" [class.disabled]="pageNumber === pages[0]">
-        <a class="page-link" (click)="prev()">«</a>
+        <a class="page-link" (click)="prev()" [innerHTML]="arrows.prev"></a>
       </li>
-      <li *ngFor="let page of pages;" class="page-item" [class.active]="page === pageNumber">
-        <a class="page-link" (click)="setCurrent($event, page)">{{page}}</a>
+      <li
+        *ngFor="let page of pages"
+        class="page-item"
+        [class.active]="page === pageNumber"
+      >
+        <a class="page-link" (click)="setCurrent($event, page)">{{ page }}</a>
       </li>
-      <li class="page-item arrow" [class.disabled]="pageNumber === pages[pages.length -1]">
-        <a class="page-link" (click)="next()">»</a>
+      <li
+        class="page-item arrow"
+        [class.disabled]="pageNumber === pages[pages.length - 1]"
+      >
+        <a class="page-link" (click)="next()" [innerHTML]="arrows.next"></a>
       </li>
-      <li *ngIf="directionLinks" class="page-item arrow" [class.disabled]="pageNumber === pages[pages.length -1]">
-        <a class="page-link" (click)="last()">»»</a>
+      <li
+        *ngIf="directionLinks"
+        class="page-item arrow"
+        [class.disabled]="pageNumber === pages[pages.length - 1]"
+      >
+        <a class="page-link" (click)="last()" [innerHTML]="arrows.last"></a>
       </li>
     </ul>
   `,
-  styleUrls: ['./ngpq-pagination.component.css']
+  styleUrls: ["./ngpq-pagination.component.css"],
 })
 export class NgpqPaginationComponent implements OnChanges {
-
-  @Input() totalElements: number;
-  @Input('page') pageNumber = 1;
-  @Input() maxSize: number;
-  @Input() pageSize: number;
+  @Input() totalElements!: number;
+  @Input("page") pageNumber = 1;
+  @Input() maxSize!: number;
+  @Input() pageSize!: number;
   @Input() directionLinks = false;
+  @Input() arrows: PaginationArrow = new PaginationArrow("«", "»", "««", "»»");
 
   @Output() pageChange: EventEmitter<number> = new EventEmitter();
 
-  totalPages: number;
+  totalPages!: number;
   pages: number[] = [];
 
-  constructor() { }
+  constructor() {}
 
   ngOnChanges() {
     if (this.pageSize || this.totalElements) {
@@ -46,7 +68,11 @@ export class NgpqPaginationComponent implements OnChanges {
 
   createPaginator() {
     this.totalPages = Math.ceil(this.totalElements / this.pageSize);
-    this.pages = this.paginate(+this.totalPages, + this.pageNumber, +this.maxSize);
+    this.pages = this.paginate(
+      +this.totalPages,
+      +this.pageNumber,
+      +this.maxSize
+    );
   }
 
   paginate(totalPages: number, pageNumber: number = 1, maxPages: any): any {
@@ -70,9 +96,11 @@ export class NgpqPaginationComponent implements OnChanges {
       }
     }
 
-    const pages = Array.from(Array((endPage + 1) - startPage).keys()).map(i => startPage + i);
+    const pages = Array.from(Array(endPage + 1 - startPage).keys()).map(
+      (i) => startPage + i
+    );
     return pages;
-  };
+  }
 
   first() {
     if (this.pageNumber > 1) {

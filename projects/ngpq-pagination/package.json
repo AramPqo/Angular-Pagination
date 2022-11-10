@@ -1,6 +1,6 @@
 {
   "name": "ngpq-pagination",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "author": "Aram Petrosyan",
   "repository": {
     "type": "git",
@@ -13,8 +13,8 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "^12.2.0",
-    "@angular/core": "^12.2.0"
+    "@angular/common": "^14.0.0",
+    "@angular/core": "^14.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
